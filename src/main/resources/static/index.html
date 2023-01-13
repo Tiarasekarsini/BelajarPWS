@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Toko Sayuran</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script>
+            function get() {
+                let view = document.getElementById("view");
+                $.ajax({
+                    url: 'http://localhost:8080/GET',
+                    dataType: 'text',
+                    success: function (result) {
+                        view.innerHTML = result;
+                    }
+                });
+            }
+            function post() {
+                let view = document.getElementById("view");
+                let id = document.getElementById("id").value;
+                let namaSayur = document.getElementById("nama_sayur").value;
+                let harga = document.getElementById("harga").value;
+                let json = {id: id, namaSayur: namaSayur, harga: harga};
+                let obj = JSON.stringify(json);
+                //view.innerHTML = "I Love Kyungsoo";
+                $.ajax({
+                    url: 'http://localhost:8080/POST',
+                    data: obj,
+                    method: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'text',
+                    success: function (result) {
+                        view.innerHTML = result;
+                    }
+                });
+            }
+            function put() {
+                let view = document.getElementById("view");
+                let id = document.getElementById("id").value;
+                let namaSayur = document.getElementById("nama_sayur").value;
+                let harga = document.getElementById("harga").value;
+                let json = {id: id, namaSayur: namaSayur, harga: harga};
+                let obj = JSON.stringify(json);
+                //view.innerHTML = "I Love Kyungsoo";
+                $.ajax({
+                    url: 'http://localhost:8080/PUT',
+                    data: obj,
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    dataType: 'text',
+                    success: function (result) {
+                        view.innerHTML = result;
+                    }
+                });
+            }
+            function del() {
+                let view = document.getElementById("view");
+                let id = document.getElementById("id").value;
+                let json = {id: id};
+                let obj = JSON.stringify(json);
+                $.ajax({
+                    url: 'http://localhost:8080/DELETE',
+                    data: obj,
+                    method: 'DELETE',
+                    contentType: 'application/json',
+                    dataType: 'text',
+                    success: function (result) {
+                        view.innerHTML = result;
+                    }
+                });
+            }
+
+        </script>      
+    </head>
+    <body>
+    <center><div style="font-size: 30px; text-transform: uppercase; font-weight: bold;">Toko Sayuran Segar Selalu</div></center>
+    <hr>
+    <table border="1" cellpadding="5">
+        <p style="font-size: 20px; font-weight: bold;">Isi Data Sesusai Form : </p>
+        <tr>
+            <td>Nomor Sayur</td>
+            <td><input type="text" id="id" name="id"/></td>
+        </tr>
+        <tr>
+            <td>Nama Sayur</td>
+            <td><input type="text" id="nama_sayur" name="nama_sayur"/></td>
+        </tr>
+        <tr>
+            <td>Harga Sayur</td>
+            <td><input type="text" id="harga" name="harga"/></td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <button onclick="get()" style="background-color: blue; color: white; font-weight: bold;">LIHAT DATA SAYURAN</button>
+    <button onclick="post()" style="background-color: greenyellow;color: black;font-weight: bold;">TAMBAH DATA SAYURAN</button>
+    <button onclick="put()" style="background-color: yellow;color: black;font-weight: bold;">UBAH DATA SAYURAN</button>
+    <button onclick="del()" style="background-color: red;color: white;font-weight: bold;">HAPUS DATA SAYURAN</button>
+    <hr>
+    <p style="font-size: 20px; text-transform: uppercase; font-weight: bold;">Output : </p>
+    <div id="view">
+    </body>
+</html>
